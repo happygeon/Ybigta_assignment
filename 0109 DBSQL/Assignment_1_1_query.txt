@@ -1,0 +1,14 @@
+SELECT
+    Customers.CustomerID,
+    Customers.CustomerName,
+    SUM(OrderDetails.Quantity * Products.Price) AS TotalPurchaseAmount
+FROM
+    Customers
+JOIN
+    Orders ON Customers.CustomerID = Orders.CustomerID
+JOIN
+    OrderDetails ON Orders.OrderID = OrderDetails.OrderID
+JOIN
+    Products ON OrderDetails.ProductID = Products.ProductID
+GROUP BY
+    Customers.CustomerID, Customers.CustomerName;

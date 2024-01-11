@@ -1,0 +1,16 @@
+SELECT
+    Categories.CategoryName,
+    SUM(OrderDetails.Quantity) AS TotalQuantitySold,
+    SUM(OrderDetails.Quantity * Products.Price) AS TotalSalesAmount
+FROM
+    OrderDetails
+JOIN
+    Products ON OrderDetails.ProductID = Products.ProductID
+JOIN
+    Categories ON Products.CategoryID = Categories.CategoryID
+GROUP BY
+    Categories.CategoryName
+HAVING
+    SUM(OrderDetails.Quantity) >= 2000
+ORDER BY
+    TotalQuantitySold DESC;
